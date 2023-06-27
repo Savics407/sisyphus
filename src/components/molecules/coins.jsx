@@ -103,8 +103,8 @@ function Coins() {
 
 
                     <div className={`${styles.coins} scroll`}>
-                        {fetchedPairs?.map(pairs => (
-                            <div className={styles.DropdownForCoins__coins}>
+                        {fetchedPairs?.map((pairs, index) => (
+                            <div key={index} className={styles.DropdownForCoins__coins}>
                                 <div className={styles.left}>
                                     <img src={pairs.src} alt="coin symbols" />
                                     <h1>{pairs.title}</h1>

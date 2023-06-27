@@ -150,7 +150,6 @@
     /* height: 100%; */
     padding: 0 8px;
     flex-grow: 1;
-    /* border: 1px solid white; */
 }
 
 .indicators {
@@ -174,7 +173,7 @@
     gap: 8px;
 }
 
-footer {
+.footer {
     border: 1px solid var(--dark-mode-card-stroke, #262932);
     background: var(--dark-mode-card-bg, #20252B);
     padding-top: 50px;
@@ -299,7 +298,7 @@ a,
         transition: 0.3s;
     }
 
-    footer {
+    .footer {
         padding-top: 20px;
         gap: 30px;
     }

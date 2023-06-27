@@ -1,23 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../components/organisms/navbar'
 import TopInfo from '../components/organisms/topInfo'
 import Orderbook from '../components/organisms/orderbook'
 import Chart from '../components/organisms/chart'
 import BuyAndSell from '../components/organisms/buyAndSell'
 import Tabs from '../components/molecules/tabs'
+import Footer from '../components/organisms/footer';
 
 function Dashboard() {
     const tabs = [
-        { title: "Chart", active: "true" },
-        {title: "Order book", active: "false"},
-        { title: "Recent Trades", active: "false" }
+        { title: "Chart", active: true },
+        { title: "Order book", active: false },
+        { title: "Recent Trades", active: false }
     ]
-
+    
+    const [activeTab, setActiveTab] = useState(tabs)
+    const [tabContent, setTabContent] = useState(tabs[0].title)
     const orderLinks = [
         {
             title: "Open Orders",
             active: "true"
-        }, 
+        },
         {
             title: "Positions",
             active: "false"
@@ -25,13 +28,29 @@ function Dashboard() {
         {
             title: "Order History",
             active: "false"
-        } ,
+        },
         {
             title: "Trade History",
             active: "false"
         },
 
     ]
+
+     const handleClick = (index) => {
+        const updatedList = tabs.map((item, i) => ({
+            ...item,
+            active: i === index //this sets the tab active to true and sets others to false 
+        }))
+        setActiveTab(updatedList)
+        setTabContent(updatedList[index].title)
+    }
+
+    const showContent = {
+        display: 'flex'
+    }
+    const HideContent = {
+        display: 'none'
+    }
     return (
         <div>
             <Navbar />
@@ -42,17 +61,15 @@ function Dashboard() {
                         <div className="tradingview">
                             {/* <!-- chart session --> */}
                             <div className='deskhide'>
-                            <Tabs tabs={tabs}/>
+                                <Tabs tabs={activeTab} handleClick={handleClick}/>
                             </div>
-                            <div className="tradingview__chart">
-                                <Chart />
-                            </div>
-                            <Orderbook />
+                            <Chart style={tabContent === tabs[1].title || tabContent === tabs[2].title ? HideContent : null} />
+                            <Orderbook style={tabContent === tabs[1].title || tabContent === tabs[2].title ? showContent : null}/>
                         </div>
                         <div className="orders">
                             <ul className="orders__tabs">
                                 {orderLinks?.map((order, index) => (
-                                    <li key={index} className={`orders__tabs--links ${order.active === "true"&& "active"}`}>{order.title}</li>
+                                    <li key={index} className={`orders__tabs--links ${order.active === "true" && "active"}`}>{order.title}</li>
                                 ))}
                             </ul>
                             <div className="orders__content">
@@ -70,6 +87,7 @@ function Dashboard() {
 
                 </div>
             </section>
+            <Footer />
         </div>
     )
 }

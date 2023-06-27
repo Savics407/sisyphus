@@ -57,7 +57,7 @@ function BuyAndSell() {
             active: i === index //this sets the tab active to true and sets others to false 
         }))
         setTabActive(updatedList)
-        setTabContent(updatedList[index].title)
+        setTabContent(updatedList[index].title) //used to check the current tab and handle the content display conditionally
     }
 
     // select currency 
@@ -67,15 +67,22 @@ function BuyAndSell() {
         setCurrency(false)
     }
 
+    const style = {
+        transform: 'translateY(0%)'
+    }
+
+    const [translate, setTranslate] = useState(false)
     return (
         <div>
-            <div className="buyMobile deskhide">
+            <div className="buyMobile deskhide" onClick={() => setTranslate(!translate)}>
                 <button className="buy">Buy</button>
                 <button className="sell">Sell</button>
 
             </div>
-            <div className={`${styles.overlay} ${atom.hide}`}></div>
-            <div className={styles.buyAndSell}>
+            {translate &&
+                <div className={`${molecule.overlay}`} onClick={() => setTranslate(!translate)}></div>
+            }
+            <div className={styles.buyAndSell} style={translate ? style : null}>
                 <div className={styles.buyAndSell__content}>
                     <ul className={molecule.segmentedTabs}>
                         <li className={`${molecule.segmentedTabs__links} ${molecule.active}`}>Buy</li>
