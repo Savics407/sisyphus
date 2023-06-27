@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './organisms.module.css'
 import logo from '../../assets/images/Fictional company logo.svg'
 import search from '../../assets/images/icons/Search.svg'
@@ -7,9 +7,17 @@ import globe from '../../assets/images/icons/globe.svg'
 import signout from '../../assets/images/icons/sign-out.svg'
 import atom from '../atoms/atoms.module.css'
 import menu from '../../assets/images/icons/menu-alt-1.svg'
+import { AppContext } from '../../contexts/AppContext'
 
 
 function Navbar() {
+    const {returnSearchQuery} = useContext(AppContext)
+    const [data, setData] = useState("")
+
+    const handleChange = (e) => {
+        // setData(e.target.value)
+        returnSearchQuery(e.target.value)
+    }
     return (
         <div>
             <div className={styles.navbar}>
@@ -30,7 +38,7 @@ function Navbar() {
                     </div>
                     <div className={styles.navbar__search}>
                         <img src={search} alt="search icon" />
-                        <input type="search" placeholder="Search" id="nav_search" />
+                        <input type="search" placeholder="Search" id="nav_search" onChange={handleChange}  />
                     </div>
                 </div>
                 <div className={styles.navbar__actions}>

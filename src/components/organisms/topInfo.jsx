@@ -9,7 +9,6 @@ function TopInfo() {
     <div>
       <div className={styles.topinfo}>
         <Coins />
-
         <div className={styles.topinfo__info}>
           <Rates />
         </div>

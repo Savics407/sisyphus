@@ -3,16 +3,21 @@ import './App.css'
 import Auth from './pages/auth'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Dashboard from './pages/dashboard'
+import { AppContextProvider } from './contexts/AppContext'
 
 function App() {
   return (
     <>
-    <Router>
-      <Routes>
-          <Route exact path='/' element={<Auth />} />
-          <Route exact path='/dashboard' element={<Dashboard />} />
-      </Routes>
-    </Router>
+      <AppContextProvider>
+
+        <Router>
+          <Routes>
+            <Route exact path='/' element={<Auth />} />
+            <Route exact path='/dashboard' element={<Dashboard />} />
+          </Routes>
+        </Router>
+      </AppContextProvider>
+
     </>
   )
 }

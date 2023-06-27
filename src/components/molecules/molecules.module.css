@@ -154,8 +154,8 @@ input[type="number"] {
     border-radius: 8px;
     border: 1px solid var(--dark-mode-input-stroke, #373B3F);
     background: var(--dark-mode-card-bg, #20252B);
-    overflow: hidden;
     justify-content: space-between;
+    position: relative;
 }
 
 .inputField__label {
@@ -180,7 +180,7 @@ input[type="number"] {
 }
 
 .inputField__input input {
-    width: 100px;
+    width: 80px;
     background: transparent;
     outline: none;
     border: none;
@@ -214,6 +214,9 @@ input[type="number"] {
 }
 
 .inputField__dropdown--items {
+    position: absolute;
+    top: 35px;
+    right: 0;
     display: flex;
     width: 183px;
     padding: 8px 0px;
@@ -356,6 +359,7 @@ input[type="number"] {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    position: relative;
 
 }
 
@@ -377,6 +381,7 @@ input[type="number"] {
 .total__currency {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .total__currency h1 {
@@ -410,6 +415,10 @@ input[type="number"] {
 }
 
 .currencySwitcher {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    z-index: 8;
     width: 220px;
     border-radius: 24px;
     border: 1px solid var(--dark-mode-input-stroke, #373B3F);
@@ -428,7 +437,6 @@ input[type="number"] {
 
 .currencySwitcher li:hover {
     background: var(--dark-mode-change-bg, #262B31);
-    backdrop-filter: blur(2.5px);
 }
 
 
@@ -763,6 +771,41 @@ input[type="number"] {
         bottom: 0;
         z-index: 8;
     }
+
+        .coindropdown {
+            width: 100%;
+        }
+    
+        .DropdownForCoins__searchbar {
+            width: 100%;
+        }
+        .DropdownForCoins {
+            width: auto !important;
+            top: 50px;
+            right: 0;
+            left: 0;
+            bottom: 0;
+        }
+    
+        .DropdownForCoins__tabs li {
+            font-size: 14px;
+        }
+    
+        .DropdownForCoins__coins h1 {
+            font-size: 12px !important;
+        }
+    
+        .DropdownForCoins__coins .left img {
+            width: 40px;
+        }
+    
+        .DropdownForCoins__coins .left {
+            gap: 5px;
+        }
+    
+        .DropdownForCoins__coins .right {
+            gap: 10px;
+        }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
