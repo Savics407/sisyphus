@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import expand from "../../assets/images/icons/u_expand-alt.svg";
 import atom from '../atoms/atoms.module.css'
 import styles from './organisms.module.css'
@@ -9,8 +9,10 @@ import undo from '../../assets/images/icons/undo.svg'
 import icon from '../../assets/images/icons/u_angle-down.svg'
 import CreateChart from '../molecules/createChart';
 import { FetchData } from '../../api/fetchApi.js'
+import { AppContext } from '../../contexts/AppContext';
 
 function Chart({ style }) {
+  const {updateSymbol} = useContext(AppContext) 
   // set the intervals to fetch data dynamically
   const intervals = [
     {
@@ -59,7 +61,7 @@ function Chart({ style }) {
 
   const getChartData = async () => {
     try {
-      const data = await FetchData("BTCUSDT", intervalData) //passing data props to the fetchApi to fetch dynamically upon user interaction
+      const data = await FetchData(updateSymbol, intervalData) //passing data props to the fetchApi to fetch dynamically upon user interaction
       const result = data.map(d => {
         return { time: (d[0] / 1000), open: parseFloat(d[1]), high: parseFloat(d[2]), low: parseFloat(d[3]), close: parseFloat(d[4]) }
       })
@@ -81,7 +83,7 @@ function Chart({ style }) {
 
   useEffect(() => {
     getChartData()
-  }, [intervalData])
+  }, [intervalData, updateSymbol])
 
   
   return (

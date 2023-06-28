@@ -10,7 +10,7 @@ import { FetchTradingTicker } from '../../api/fetchApi'
 import {toast} from 'react-toastify'
 
 function Coins({symbol, setSymbol, value}) {
-    const { searchQuery, returnSearchQuery } = useContext(AppContext)
+    const { searchQuery, returnSearchQuery, setUpdateSymbol } = useContext(AppContext)
     const [pairs, setPairs] = useState([])
     const [fetchedPairs, setFetchedPairs] = useState([])
 
@@ -101,6 +101,7 @@ function Coins({symbol, setSymbol, value}) {
                             <div key={index} className={styles.DropdownForCoins__coins} onClick={() => {
                                 setPairVariable(pairs.symbol)
                                 setSymbol(pairs.symbol)
+                                setUpdateSymbol(pairs.symbol)
                                 setDropDown(false)
                             }}>
                                 <div className={styles.left}>
