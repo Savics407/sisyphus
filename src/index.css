@@ -238,7 +238,7 @@ a {
 }
 
 .git-container {
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -272,7 +272,6 @@ a {
 
 .found {
   height: 100%;
-  display: none;
 }
 
 .git-container__repositories #repositories {

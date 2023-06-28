@@ -11,7 +11,7 @@ function TopInfo() {
   const getSymbolTicker = async () => {
     try {
       const data = await FetchTicker(symbol)
-      console.log(data)
+      // console.log(data)
       setPairTicker(data)
     } catch (error) {console.error(error)}
   }

@@ -33,3 +33,16 @@ export const FetchTicker = async (symbol) => {
     console.error(error);
   }
 };
+
+//fetching all the users repository using their username 
+export const FetchRepo = async (user) => {
+  try {
+    const response = await fetch(
+      `https://api.github.com/users/${user}/repos`
+    );
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};

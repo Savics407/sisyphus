@@ -10,7 +10,7 @@ function Rates({ pairTicker }) {
   const main = {
     color: "#00C076"
   }
-// using paiTicker as a prop to assign its data to their corresponding props for the  
+// using pairTicker as a prop to assign its data to their corresponding props for the  
   return (
     <div>
       <div className={`${styles.rates} scroll"`}>

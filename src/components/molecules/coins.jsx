@@ -7,6 +7,7 @@ import symbols from '../../assets/images/tokens.svg'
 import search from '../../assets/images/icons/Search.svg'
 import { AppContext } from '../../contexts/AppContext'
 import { FetchTradingTicker } from '../../api/fetchApi'
+import {toast} from 'react-toastify'
 
 function Coins({symbol, setSymbol, value}) {
     const { searchQuery, returnSearchQuery } = useContext(AppContext)
@@ -22,6 +23,15 @@ function Coins({symbol, setSymbol, value}) {
             setFetchedPairs(data.slice(0, 50)) //limited the number of data fetched to just 50 
         } catch (error) {
             console.error();
+            toast.error(`network error`, {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
         }
     }
 

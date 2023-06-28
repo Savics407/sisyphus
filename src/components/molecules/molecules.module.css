@@ -807,6 +807,14 @@ input[type="number"] {
         .DropdownForCoins__coins .right {
             gap: 10px;
         }
+                .currencySwitcher {
+                    position: absolute;
+                    top: -100px;
+                    right: 50px;
+                    z-index: 8;
+                    width: 220px;
+                    padding: 5px 0;
+                }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
