@@ -86,16 +86,9 @@ function Auth() {
               <img src={getGravatarURL(email)} alt="gravater" id="gravatar" />
             </div>
             <div className="git-container__repositories">
-              {repos?.length <= 0 &&
-                <div>
-                  <h1>
-                    No Github repositories found for user {userName}
-                  </h1>
-                </div>
-              }
 
               {/* List all users repositories */}
-              {repos?.length > 0 &&
+              {repos?.length > 0 ?
                 <div className="found" id="found">
                   <h1>{repos?.length} github repositories for {userName}</h1>
                   <div className="scroll" id="repositories">
@@ -106,6 +99,12 @@ function Auth() {
                     </ul>
                   </div>
 
+                </div>
+                :
+                <div>
+                  <h1>
+                    No Github repositories found for user {userName}
+                  </h1>
                 </div>
               }
 
