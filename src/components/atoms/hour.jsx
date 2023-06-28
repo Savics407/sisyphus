@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './atoms.module.css'
 
 
-function Hour({main, title, icon, alt}) {
+function Hour({main, title, icon, alt, price, percentage}) {
   return (
     <div>
           <div className={styles.hour}>
@@ -10,7 +10,7 @@ function Hour({main, title, icon, alt}) {
                   <img src={icon} alt="clock" />
                   <span>{title}</span>
               </h1>
-              <h1 className={`${styles.hour__figure}`} style={main} alt={alt}>520.80 +1.25%</h1>
+              <h1 className={`${styles.hour__figure}`} style={main} alt={alt}>{price} {percentage}%</h1>
           </div>
     </div>
   )

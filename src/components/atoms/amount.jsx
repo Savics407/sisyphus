@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from './atoms.module.css'
 
-function Amount() {
+function Amount({value}) {
     return (
         <div>
             <div className={styles.amount}>
-                <h1 className="">$20,634</h1>
+                <h1 className="">${value}</h1>
             </div>
         </div>
     )

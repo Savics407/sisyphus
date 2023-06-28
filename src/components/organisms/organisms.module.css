@@ -76,7 +76,7 @@
     display: flex;
     padding: 16px;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
     border-radius: 8px;
     border: 1px solid var(--dark-mode-card-stroke, #262932);
     background: var(--dark-mode-card-bg, #20252B);
@@ -260,6 +260,7 @@ a,
 
     .topinfo {
         flex-wrap: wrap;
+        gap: 10px;
     }
 
     .orderbook {

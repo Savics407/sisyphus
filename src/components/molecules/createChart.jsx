@@ -29,7 +29,7 @@ function CreateChart(props) {
                 horzLines: { color: "transparent" },
             },
             width: chartContainerRef.current.clientWidth,
-            height:500,
+            height: 500,
         })
 
         chart.timeScale().fitContent();

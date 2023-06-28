@@ -422,11 +422,11 @@ a {
     border: 1px solid var(--dark-mode-card-stroke, #262932);
     background: var(--dark-mode-change-bg, #262B31);
     display: flex;
-    width: 100%;
+    width: calc(100vw - 16px);
     height: 64px;
     padding: 16px;
     justify-content: center;
-    align-items: flex-start;
+    /* align-items: flex-start; */
     gap: 16px;
     flex-shrink: 0;
   }

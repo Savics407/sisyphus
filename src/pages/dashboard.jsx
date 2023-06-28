@@ -11,7 +11,7 @@ function Dashboard() {
     const tabs = [
         { title: "Chart", active: true },
         { title: "Order book", active: false },
-        { title: "Recent Trades", active: false }
+        // { title: "Recent Trades", active: false }
     ]
     
     const [activeTab, setActiveTab] = useState(tabs)
@@ -63,8 +63,8 @@ function Dashboard() {
                             <div className='deskhide'>
                                 <Tabs tabs={activeTab} handleClick={handleClick}/>
                             </div>
-                            <Chart style={tabContent === tabs[1].title || tabContent === tabs[2].title ? HideContent : null} />
-                            <Orderbook style={tabContent === tabs[1].title || tabContent === tabs[2].title ? showContent : null}/>
+                            <Chart style={tabContent === tabs[1].title ? HideContent : null} />
+                            <Orderbook style={tabContent === tabs[1].title  ? showContent : null}/>
                         </div>
                         <div className="orders">
                             <ul className="orders__tabs">

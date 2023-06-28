@@ -6,55 +6,35 @@ import Amount from '../atoms/amount'
 import symbols from '../../assets/images/tokens.svg'
 import search from '../../assets/images/icons/Search.svg'
 import { AppContext } from '../../contexts/AppContext'
+import { FetchTradingTicker } from '../../api/fetchApi'
 
-function Coins() {
+function Coins({symbol, setSymbol, value}) {
     const { searchQuery, returnSearchQuery } = useContext(AppContext)
-    const pairs = [
-        {
-            title: "BTC/USDT",
-            amount: "$23,234.6",
-            percentage: '+0.005%',
-            src: symbols
-        },
-        {
-            title: "ETH/USDT",
-            amount: "$23,234.6",
-            percentage: '+0.005%',
-            src: symbols
-        },
-        {
-            title: "LTC/USDT",
-            amount: "$23,234.6",
-            percentage: '+0.005%',
-            src: symbols
-        },
-        {
-            title: "DOGE/USDT",
-            amount: "$23,234.6",
-            percentage: '+0.005%',
-            src: symbols
-        },
-        {
-            title: "ADA/USDT",
-            amount: "$23,234.6",
-            percentage: '+0.005%',
-            src: symbols
-        },
-        {
-            title: "XLM/USDT",
-            amount: "$23,234.6",
-            percentage: '+0.005%',
-            src: symbols
-        }
-    ]
-    const [fetchedPairs, setFetchedPairs] = useState(pairs)
+    const [pairs, setPairs] = useState([])
+    const [fetchedPairs, setFetchedPairs] = useState([])
+
     const [data, setData] = useState("")
+
+    // fetch the ticker data
+    const getPairs = async () => {
+        try {
+            const data = await FetchTradingTicker()
+            setFetchedPairs(data.slice(0, 50)) //limited the number of data fetched to just 50 
+        } catch (error) {
+            console.error();
+        }
+    }
+
+
+    // set the default pair
+    const [pairVariable, setPairVariable] = useState(symbol)
 
     const [dropdown, setDropDown] = useState(false)
 
+    // search and filter out the trading pairs from the navbar search input field
     useEffect(() => {
         if (searchQuery) {
-            const filteredPairs = pairs.filter(pair => pair.title.toLowerCase().includes(searchQuery.toLowerCase()))
+            const filteredPairs = pairs.filter(pair => pair.symbol.toLowerCase().includes(searchQuery.toLowerCase()))
             setFetchedPairs(filteredPairs)
             setDropDown(true)
         } else {
@@ -63,11 +43,15 @@ function Coins() {
         }
     }, [searchQuery])
 
+    useEffect(() => {
+        getPairs()
+    }, [])
 
+// search and filter out the trading pairs
     const handleChange = (e) => {
         const searchData = e.target.value;
         setData(searchData);
-        const filteredPairs = searchData !== "" ? pairs.filter(pair => pair.title.toLowerCase().includes(searchData.toLowerCase())) : pairs;
+        const filteredPairs = searchData !== "" ? pairs.filter(pair => pair.symbol.toLowerCase().includes(searchData.toLowerCase())) : pairs;
         setFetchedPairs(filteredPairs);
     }
 
@@ -78,14 +62,14 @@ function Coins() {
                     src={currency}
                     alt="currency-symbol"
                 />
-                <h1 className="dropnow" onClick={() => setDropDown(!dropdown)}>BTC/USDT</h1>
+                <h1 className="dropnow" onClick={() => setDropDown(!dropdown)}>{pairVariable}</h1>
                 <span>
                     <img
                         src={caret}
                         alt="caret-angle"
                     />
                 </span>
-                <Amount />
+                <Amount value={parseFloat(value).toFixed(2)} />
                 {/* <!-- DropDown for coins --> */}
                 {dropdown && <div className={styles.DropdownForCoins}>
                     <h1 className={styles.DropdownForCoins__heading}>Select Market</h1>
@@ -96,7 +80,7 @@ function Coins() {
                     </div>
 
                     <ul className={styles.DropdownForCoins__tabs}>
-                        <li className="active">All</li>
+                        <li className={styles.active}>All</li>
                         <li>USD</li>
                         <li>BTC</li>
                     </ul>
@@ -104,14 +88,18 @@ function Coins() {
 
                     <div className={`${styles.coins} scroll`}>
                         {fetchedPairs?.map((pairs, index) => (
-                            <div key={index} className={styles.DropdownForCoins__coins}>
+                            <div key={index} className={styles.DropdownForCoins__coins} onClick={() => {
+                                setPairVariable(pairs.symbol)
+                                setSymbol(pairs.symbol)
+                                setDropDown(false)
+                            }}>
                                 <div className={styles.left}>
-                                    <img src={pairs.src} alt="coin symbols" />
-                                    <h1>{pairs.title}</h1>
+                                    <img src={symbols} alt="coin symbols" />
+                                    <h1>{pairs.symbol}</h1>
                                 </div>
                                 <div className={styles.right}>
-                                    <h1>{pairs.amount}</h1>
-                                    <h1 className="percentage">{pairs.percentage}</h1>
+                                    <h1>${pairs.weightedAvgPrice}</h1>
+                                    <h1 className={styles.percentage} style={pairs.priceChangePercent.includes("-") ? { color: 'red' } : {}}>{pairs.priceChangePercent}%</h1>
                                 </div>
                             </div>
                         ))}
